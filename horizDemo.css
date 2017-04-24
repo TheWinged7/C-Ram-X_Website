@@ -1,0 +1,30 @@
+.menubar {
+
+}
+
+.contentBox {
+
+}
+
+.slider {
+
+}
+
+.panel {
+
+}
+
+.panel:nth-child(1) {
+      background-image:
+        url('http://lorempixel.com/output/business-q-c-1000-500-10.jpg');
+}
+
+.panel:nth-child(2) {
+      background-image:
+        url('http://lorempixel.com/output/cats-q-c-1000-500-7.jpg');
+}
+
+.panel:nth-child(3) {
+      background-image:
+        url('http://lorempixel.com/output/technics-q-c-1000-500-7.jpg');
+}
