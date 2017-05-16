@@ -1,0 +1,82 @@
+body {
+  background-color: rgba(150, 0, 150, 1);
+  min-height:  500px;
+
+  overflow-x: hidden;
+
+}
+
+.menubar {
+  height: 20%;
+  width: 110%;
+  margin-left: -10px;
+  margin-top: -10px;
+  border-bottom: solid;
+  border-color: rgb(0, 0, 0);
+  background-color: rgb(0,0,150);
+  display:block;
+}
+
+.contentBox {
+  height: 80%;
+  width: 90%;
+  display: block;
+  margin-top: 1%;
+  margin-left: 2%;
+  overflow: hidden;
+}
+
+.slider {
+  width:inherit;
+  height: inherit;
+  display: inline;
+}
+
+.testButton {
+  display: inline;
+  float: left;
+  margin-right: 2%;
+  margin-left: 2%;
+  margin-top: 2%;
+}
+
+
+#nextPanel {
+  float: right;
+}
+
+
+
+.panel {
+  border-style: dashed;
+  border-color: rgba(0, 0, 0, 0.5);
+  background-repeat: no-repeat;
+  position: absolute;
+}
+
+ img {
+   display: inline;
+ }
+.panel:nth-child(1) {
+  display: grid;
+
+
+    /*  background-image:
+        url('http://lorempixel.com/output/business-q-c-1000-500-10.jpg'); */
+}
+
+.panel:nth-child(2) {
+  display:grid;
+/*
+      background-image:
+        url('http://lorempixel.com/output/cats-q-c-1000-500-7.jpg');
+        */
+}
+
+.panel:nth-child(3) {
+  display: none;
+/*
+      background-image:
+        url('http://lorempixel.com/output/technics-q-c-1000-500-7.jpg');
+        */
+}
