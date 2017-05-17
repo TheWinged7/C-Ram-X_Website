@@ -5,7 +5,10 @@ var $currentPanel,
     $winWidth,
     $winHeight,
     $doc,
-    $panels;
+    $panels,
+    $menubar,
+    $contentBox;
+
 
 function init() {
   $currentPanel = 0;
@@ -13,24 +16,69 @@ function init() {
 
   $doc = $(document);
   $panels = $(document.getElementsByClassName("panel"));
+  $menubar = $(document.getElementsByClassName("menubar"));
+  $prev = $(document.getElementById("prevPanel"));
+  $contentBox = $(document.getElementsByClassName("contentBox"));
 
+$wind.resize(function () {
+  $winHeight = $wind.height();
+  $winWidth = $wind.width();
+
+  $contentBox
+    .height($winHeight*.85).width($winWidth *.95);
+  $menubar.height($winHeight*.1);
+
+  $contentBox
+    .hide().show(0);
+  console.log($contentBox.height() +"\t"+
+            $contentBox.width());
+
+  });
 
   $winHeight = $wind.height();
   $winWidth = $wind.width();
-//  $next = $(document.getElementById("nextPanel"));
-  $prev = $(document.getElementById("prevPanel"));
+  $contentBox
+    .height($winHeight*.85).width($winWidth *.95)
+    .css('z-index', '0');
 
-//  $next.onClick = nextButton;
+    $menubar.height($winHeight*.1).css('z-index', '100');
+
 
   for ($i =0; $i < $panels.length; $i++)
   {
-    if ($i== $currentPanel)
-    {
+
+      $($panels[$i]).css('z-index','-10')
+      .height(
+        $(document.getElementsByClassName("contentBox"))
+        .height()
+      ).width (
+
+        $(document.getElementsByClassName("contentBox"))
+        .width()-100
+      );
       $panels[$i].style.display = "block";
-    }
-    else{
-      $panels[$i].style.display = "none";
-    }
+
+    //  $panels[$i].style.visibility = "visible";
+
+      $h = $($panels[0]).height()  ;
+
+      $h += $menubar.height() +5;
+
+      if ($i!=0)
+      {$($panels[$i]).animate({top:  $h  } );}
+      else
+      {$($panels[$i]).animate({top:  "+=5px" } );}
+
+
+
+      if ($currentPanel === $i)
+      {
+        $panels[$i].style.visibility = "visible";
+      }
+      else
+      {
+        $panels[$i].style.visibility = "hidden";
+      }
 
   }
 
@@ -74,147 +122,39 @@ function goToPanel ($prev)
 
 //$panels[$currentPanel].style.display = "block";
 //$panelHeight = $panels[$currentPanel].height;
-$($panels[$currentPanel]).css("display", "block")
-    .stop().animate({}, "slow");
-$($panels[$prev]).stop().animate({up: '+=500px'},"slow")
-    .css("display", "none");
+$h;
+if ($currentPanel > $prev)
+{
+  $h = "+=" + ($($panels[$currentPanel]).height())*-1 + "px";
 
-/*
-  for ($i =0; $i < $panels.length; $i++)
-  {
-    if ($i== $currentPanel)
-    {
-      console.log ("not this panel:\t" + $i);
-    }
-    else{
-      $panels[$i].style.display = "none";
-    }
-  }
-*/
+  $($panels[$currentPanel]).children().fadeOut(0);
+
+  $($panels[$currentPanel]).css("visibility","visible")
+  .animate({top: $h}, "slow");
+
+  $($panels[$currentPanel]).children().fadeIn("slow");
+
+  $($panels[$prev]).animate({top: $h},"slow", function () {
+      $($panels[$prev]).css("visibility", "hidden");
+  }) ;
+
+}
+else if ($prev > $currentPanel){
+  $h = "+=" + ($($panels[$currentPanel]).height()) + "px";
+
+  $($panels[$currentPanel]).children().fadeOut(0);
+
+  $($panels[$currentPanel]).css("visibility","visible")
+    .animate({top: $h}, "slow");
+
+  $($panels[$currentPanel]).children().fadeIn("slow");
+
+  $($panels[$prev]).animate({top: $h},"slow", function () {
+      $($panels[$prev]).css("visibility", "hidden");
+
+  }) ;
 
 }
 
 
-/*
-(function($) {
-var PageSlider = function (slider, options) {
-  this.contentBox = slider;
-  this.slider = slider.children().first();
-  this.currentIndex = 0;
-  this.pages = this.slider.children();
-  this.contentBox.width(this.pages.first().width() );
-
-  var totalWidth = 0;
-  this.pages.each(function (index, page) {
-    totalWidth += $(page).width();
-  } );
-  this.slider.width(totalWidth);
-
-  this.bindEvents();
 }
-
-
-$.extend(PageSlider.prototype, {
-  bindEvents: function () {
-    this._removeTransition = $.proxy(this.removeTransition, this);
-    this._startDrag = $.proxy(this.startDrag, this);
-    this._doDrag = $.proxy(this.doDrag, this);
-    this._endDrag = $.proxy(this.endDrag, this);
-
-    this.slider
-      .on('mousedown', this._startDrag)
-      .on('transitioned', this._removeTransition);
-    $('body')
-      .on('mousemove', this._doDrag)
-      .on('mouseup', this.endDrag);
-  },
-  destroy: function() {
-    this.slider
-    .off('mousedown', this._startDrag)
-    .off('transitioned', this._removeTransition);
-  $('body')
-    .off('mousemove', this._doDrag)
-    .off('mouseup', this.endDrag);
-  },
-
-  startDrag: function (event) {
-    this.enableDrag = true;
-    this.dragStartX = event.clientX;
-  },
-  doDrag: function (event) {
-    if (this.enableDrag) {
-      var position = this.pages.eq(this.currentIndex).position();
-      var delta = event.clientX - this.dragStartX;
-
-      this.slider.css('transform', 'transelate3d(' + (delta- position.left) +
-      'px, 0, 0)');
-      event.preventDefault();
-    }
-  },
-  endDrag: function (event) {
-    if (this.enableDrag) {
-      this.enableDrag = false;
-
-      var delta = event.clientX - this.dragStartX;
-      if (Math.abs(delta) > this.slider.width()/5) {
-        if (delta <0){
-          this.next();
-        }
-        else {
-          this.prev();
-        }
-      }
-      else {
-        this.current();
-      }
-    }
-  },
-  removeTransition: function (event) {
-    this.slider.css ('transition', 'none');
-  },
-
-  goToIndex: function (index) {
-    var position = this.pages.eq(index).position();
-
-    this.slider
-      .css('transition', 'all 400ms ease')
-      .css('transform', 'transelate3d(' + (-1 * (position.left)) +'px, 0, 0)');
-
-    this.currentIndex = index;
-  },
-  current: function () {
-    this.goToIndex(this.currentIndex);
-  },
-  next: function () {
-    if (this.currentIndex >- this.pages.length - 1) {
-      this.current();
-    }
-    else {
-      this.goToIndex(this.currentIndex + 1);
-    }
-  },
-  prev: function () {
-    if (this.currentIndex <=0) {
-      this.current();
-    }
-    else{
-      this.goToIndex(this.currentIndex -1);
-    }
-  }
-
-} );
-
-
-
-
-
-  $.fn.PageSlider = function (options) {
-    this.each (function(index, slider) {
-      var $this = $(slider);
-      var pageSlider = new PageSlider($this);
-      $this.data('pageSlider', pageSlider);
-    });
-    return this;
-  }
-}) (jQuery);
-*/

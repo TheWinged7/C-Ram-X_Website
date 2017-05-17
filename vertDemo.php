@@ -18,13 +18,13 @@
 
 	<body>
 		<div  class="menubar">
-
+			<button class="testButton" id="prevPanel" onClick="prevButton()" >Previous </button>
+			<button class="testButton" id="nextPanel" onClick="nextButton()">Next </button>
 		</div>
 
 
 		<div class="contentBox" id = "content">
-			<button class="testButton" id="prevPanel" onClick="prevButton()" >Previous </button>
-			<button class="testButton" id="nextPanel" onClick="nextButton()">Next </button>
+
 
 			<div class="slider" id = "slider">
 				<div class="panel" >
