@@ -24,6 +24,12 @@ $wind.resize(function () {
   $winHeight = $wind.height();
   $winWidth = $wind.width();
 
+
+  $('html, body').css({
+      overflow: 'hidden',
+      height: '100%'
+  });
+
   $contentBox
     .height($winHeight*.85).width($winWidth *.95);
   $menubar.height($winHeight*.1);
@@ -56,9 +62,7 @@ $wind.resize(function () {
         $(document.getElementsByClassName("contentBox"))
         .width()-100
       );
-      $panels[$i].style.display = "block";
-
-    //  $panels[$i].style.visibility = "visible";
+    //  $panels[$i].style.display = "block";
 
       $h = $($panels[0]).height()  ;
 
@@ -73,11 +77,12 @@ $wind.resize(function () {
 
       if ($currentPanel === $i)
       {
-        $panels[$i].style.visibility = "visible";
+        $panels[$i].style.display = "block";
+
       }
       else
       {
-        $panels[$i].style.visibility = "hidden";
+        $panels[$i].style.display = "none";
       }
 
   }
@@ -129,13 +134,13 @@ if ($currentPanel > $prev)
 
   $($panels[$currentPanel]).children().fadeOut(0);
 
-  $($panels[$currentPanel]).css("visibility","visible")
+  $($panels[$currentPanel]).css("display","block")
   .animate({top: $h}, "slow");
 
   $($panels[$currentPanel]).children().fadeIn("slow");
 
   $($panels[$prev]).animate({top: $h},"slow", function () {
-      $($panels[$prev]).css("visibility", "hidden");
+      $($panels[$prev]).css("display","none");
   }) ;
 
 }
@@ -144,13 +149,13 @@ else if ($prev > $currentPanel){
 
   $($panels[$currentPanel]).children().fadeOut(0);
 
-  $($panels[$currentPanel]).css("visibility","visible")
+  $($panels[$currentPanel]).css("display","block")
     .animate({top: $h}, "slow");
 
   $($panels[$currentPanel]).children().fadeIn("slow");
 
   $($panels[$prev]).animate({top: $h},"slow", function () {
-      $($panels[$prev]).css("visibility", "hidden");
+      $($panels[$prev]).css("display","none");
 
   }) ;
 
