@@ -17,22 +17,28 @@
 	</head>
 
 	<body>
+
 		<div  class="menubar">
 			<button class="testButton" id="prevPanel" onClick="prevButton()" >Previous </button>
 			<button class="testButton" id="nextPanel" onClick="nextButton()">Next </button>
+			<input type="image" class="navButton" id="homeButton" onclick="homeButton()"
+				src="./img/temp_home.png">
 		</div>
-
 
 		<div class="contentBox" id = "content">
 
 
 			<div class="slider" id = "slider">
 				<div class="panel" >
-						<img src="http://lorempixel.com/output/business-q-c-1000-500-10.jpg" />
+					<!--	<img src="http://lorempixel.com/output/business-q-c-1000-500-10.jpg" /> -->
+
 				</div>
 
 				<div class="panel" >
-					<img src="http://lorempixel.com/output/cats-q-c-1000-500-7.jpg" />
+					<!-- <img src="http://lorempixel.com/output/cats-q-c-1000-500-7.jpg" /> -->
+					<?php
+						include_once "./fontTest.php";
+					?>
 				</div>
 
 				<div class="panel" >

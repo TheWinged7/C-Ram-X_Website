@@ -11,7 +11,7 @@
 	</head>
 
 	<body>
-		foo 
+		foo
 
 	</body>
 

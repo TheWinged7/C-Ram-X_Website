@@ -7,7 +7,9 @@ var $currentPanel,
     $doc,
     $panels,
     $menubar,
-    $contentBox;
+    $menuIcons,
+    $contentBox,
+    $topSpot;
 
 
 function init() {
@@ -19,6 +21,8 @@ function init() {
   $menubar = $(document.getElementsByClassName("menubar"));
   $prev = $(document.getElementById("prevPanel"));
   $contentBox = $(document.getElementsByClassName("contentBox"));
+  $menuIcons = $(document.getElementsByClassName("navButton"));
+
 
 $wind.resize(function () {
   $winHeight = $wind.height();
@@ -31,24 +35,36 @@ $wind.resize(function () {
   });
 
   $contentBox
-    .height($winHeight*.85).width($winWidth *.95);
-  $menubar.height($winHeight*.1);
+    .height($winHeight*.9).width($winWidth *.85);
+
+  $menubar.height($winHeight*1.11).width($winWidth* .08)
 
   $contentBox
     .hide().show(0);
-  console.log($contentBox.height() +"\t"+
-            $contentBox.width());
+
+  for ($i =0; $i< $menuIcons.length; $i++)
+  {
+    $($menuIcons[$i]).width($menubar.width()*.9).height($menubar.width()*.9);
+  }
 
   });
 
   $winHeight = $wind.height();
   $winWidth = $wind.width();
   $contentBox
-    .height($winHeight*.85).width($winWidth *.95)
+    .height($winHeight*.9).width($winWidth *.85)
     .css('z-index', '0');
 
-    $menubar.height($winHeight*.1).css('z-index', '100');
+  $menubar.height($winHeight*1.11).width($winWidth* .08)
+    .css('z-index', '100');
+    console.log($menuIcons.length);
+    for ($i =0; $i< $menuIcons.length; $i++)
+    {
+      $($menuIcons[$i]).width($menubar.width()*.9).height($menubar.width()*.9);
+    }
 
+    $h = $winHeight *-1.5 ;
+    $topSpot = $($panels[0]).position();
 
   for ($i =0; $i < $panels.length; $i++)
   {
@@ -62,18 +78,8 @@ $wind.resize(function () {
         $(document.getElementsByClassName("contentBox"))
         .width()-100
       );
-    //  $panels[$i].style.display = "block";
 
-      $h = $($panels[0]).height()  ;
-
-      $h += $menubar.height() +5;
-
-      if ($i!=0)
-      {$($panels[$i]).animate({top:  $h  } );}
-      else
-      {$($panels[$i]).animate({top:  "+=5px" } );}
-
-
+      $($panels[$i]).animate({top: $h }, 1 );
 
       if ($currentPanel === $i)
       {
@@ -87,12 +93,26 @@ $wind.resize(function () {
 
   }
 
+  $($panels[0]).animate({top:  $topSpot.top }, 1 );
+
 
 }
 
+function homeButton ()
+{
+  $prevPanel = $currentPanel;
+  $currentPanel = 0;
+
+  if ($currentPanel !== $prevPanel)
+  {
+    goToPanel ($prevPanel);
+  }
+}
+
+//!!!!!! REMEMBER IDIOT TO REMOVE THESE ONCE MENU IS BUILT !!!!!
 function nextButton ()
 {
-  $currentPanel++;
+   $currentPanel++;
 
 
     if ($currentPanel < $panels.length )
@@ -125,41 +145,23 @@ function prevButton ()
 function goToPanel ($prev)
 {
 
-//$panels[$currentPanel].style.display = "block";
-//$panelHeight = $panels[$currentPanel].height;
-$h;
-if ($currentPanel > $prev)
-{
-  $h = "+=" + ($($panels[$currentPanel]).height())*-1 + "px";
+$h = "-=" + $winHeight * 1.5 ;
 
   $($panels[$currentPanel]).children().fadeOut(0);
 
+
   $($panels[$currentPanel]).css("display","block")
-  .animate({top: $h}, "slow");
+  .animate({  left: $topSpot.left, top:$topSpot.top}, "slow");
+//  .animate({top: $h}, "slow");
 
   $($panels[$currentPanel]).children().fadeIn("slow");
 
   $($panels[$prev]).animate({top: $h},"slow", function () {
+//  $($panels[$prev]).animate({},"slow", function () {
       $($panels[$prev]).css("display","none");
   }) ;
 
-}
-else if ($prev > $currentPanel){
-  $h = "+=" + ($($panels[$currentPanel]).height()) + "px";
 
-  $($panels[$currentPanel]).children().fadeOut(0);
-
-  $($panels[$currentPanel]).css("display","block")
-    .animate({top: $h}, "slow");
-
-  $($panels[$currentPanel]).children().fadeIn("slow");
-
-  $($panels[$prev]).animate({top: $h},"slow", function () {
-      $($panels[$prev]).css("display","none");
-
-  }) ;
-
-}
 
 
 }
