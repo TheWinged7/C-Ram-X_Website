@@ -37,7 +37,7 @@ $wind.resize(function () {
   $contentBox
     .height($winHeight*.9).width($winWidth *.85);
 
-  $menubar.height($winHeight*1.11).width($winWidth* .08)
+  $menubar.height($winHeight*1).width($winWidth* .08)
 
   $contentBox
     .hide().show(0);
@@ -55,7 +55,7 @@ $wind.resize(function () {
     .height($winHeight*.9).width($winWidth *.85)
     .css('z-index', '0');
 
-  $menubar.height($winHeight*1.11).width($winWidth* .08)
+  $menubar.height($winHeight*1).width($winWidth* .08)
     .css('z-index', '100');
     console.log($menuIcons.length);
     for ($i =0; $i< $menuIcons.length; $i++)
