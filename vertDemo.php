@@ -36,18 +36,18 @@
 				</div>
 
 				<div class="panel" >
-					<!-- <img src="http://lorempixel.com/output/cats-q-c-1000-500-7.jpg" /> -->
 					<?php
 						include_once "./fontTest.php";
 					?>
+
 				</div>
 
 				<div class="panel" >
 					<img src="http://lorempixel.com/output/technics-q-c-1000-500-7.jpg" />
 				</div>
 
-			<div>
 
+			</div>
 		</div>
 
 

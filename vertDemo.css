@@ -14,18 +14,18 @@ body {
   background-color: #3bb5ff;
   display:inline-block;
   float: left;
+  position: fixed;
 }
 
 .contentBox {
 
   display: inline-block;
   margin-top: 0px;
-  margin-left: 2%;
+  margin-left: 10%;
   overflow: hidden;
 }
 
 .slider {
-
   display: inline-block;
   overflow: hidden;
 }
@@ -43,37 +43,19 @@ body {
   border-style: dashed;
   border-color: rgba(0, 0, 0, 0.5);
   background-repeat: no-repeat;
-  position: absolute;
   float:left;
-  display: inline-block;
-  clear:bo.panel.th;
+  clear:both;
+  position: absolute;
+  overflow: auto;
 }
+
+/*
+overflow: auto;
+
+
+*/
 
  .panel.img {
    display: block;
    clear:both;
  }
-
-.panel:nth-child(1) {
-  display: grid;
-
-
-    /*  background-image:
-        url('http://lorempixel.com/output/business-q-c-1000-500-10.jpg'); */
-}
-
-.panel:nth-child(2) {
-  display:grid;
-/*
-      background-image:
-        url('http://lorempixel.com/output/cats-q-c-1000-500-7.jpg');
-        */
-}
-
-.panel:nth-child(3) {
-  display: none;
-/*
-      background-image:
-        url('http://lorempixel.com/output/technics-q-c-1000-500-7.jpg');
-        */
-}

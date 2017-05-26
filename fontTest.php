@@ -16,7 +16,7 @@
    1234567890 <br/>
    `~@#$%^&*()-_=+\|{}[];:'",<>?/ <br/>
  </p>
- <p style="font-family:'Raleway', sans-serif; margin-le3ft:15px; margin-top: 20px;">
+ <p style="font-family:'Raleway', sans-serif; margin-left:15px; margin-top: 20px;">
    the quick brown fox jumps over the lazy dog. <br/>
    THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG! <br/>
    1234567890 <br/>
